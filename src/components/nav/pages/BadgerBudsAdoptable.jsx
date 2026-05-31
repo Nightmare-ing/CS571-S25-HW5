@@ -11,7 +11,6 @@ export default function BadgerBudsAdoptable(props) {
 
     function saveCat(id) {
         const updatedSavedCatIds = [...savedCatIds, id];
-        console.log(updatedSavedCatIds);
         setSavedCatIds(updatedSavedCatIds);
         sessionStorage.setItem(
             "savedCatIds",
