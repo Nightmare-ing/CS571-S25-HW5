@@ -4,6 +4,7 @@ import BadgerBudsDataContext from "../contexts/BadgerBudsDataContext";
 
 export default function BadgerBudsSummary(props) {
     const [showMore, setShowMore] = useState(false);
+
     return (
         <Card>
             <Card.Img
@@ -32,7 +33,16 @@ export default function BadgerBudsSummary(props) {
                 <Button size="sm" onClick={() => setShowMore(!showMore)}>
                     Show {showMore ? "Less" : "More"}
                 </Button>
-                <Button size="sm" variant="secondary">
+                <Button
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => {
+                        alert(
+                            `${props.name} with id: ${props.id} has been added to your basket!`,
+                        );
+                        props.save(props.id);
+                    }}
+                >
                     ❤️ Save
                 </Button>
             </Card.Footer>
