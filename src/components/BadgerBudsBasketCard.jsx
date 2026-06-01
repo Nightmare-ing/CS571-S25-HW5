@@ -13,7 +13,16 @@ export default function BadgerBudsBasketCard(props) {
                 variant="top"
             />
             <Card.Footer className="d-flex gap-2">
-                <Button size="sm" variant="secondary">
+                <Button
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => {
+                        alert(
+                            `${props.name} has been removed from your basket!`,
+                        );
+                        props.unselect(props.id);
+                    }}
+                >
                     Unselect
                 </Button>
                 <Button size="sm" variant="success">

@@ -8,6 +8,18 @@ export default function BadgerBudsBasket(props) {
     const catIds = JSON.parse(sessionStorage.getItem("savedCatIds"));
     const [savedCatIds, setSavedCatIds] = useState(catIds ?? []);
     const catsInBasket = buds.filter((bud) => savedCatIds.includes(bud.id));
+
+    function unselectCat(catId) {
+        const updatedSavedCatIds = savedCatIds.filter(
+            (savedCatId) => savedCatId !== catId,
+        );
+        sessionStorage.setItem(
+            "savedCatIds",
+            JSON.stringify(updatedSavedCatIds),
+        );
+        setSavedCatIds(updatedSavedCatIds);
+    }
+
     return (
         <div>
             <h1>Badger Buds Basket</h1>
@@ -16,7 +28,10 @@ export default function BadgerBudsBasket(props) {
                 <Row className="gy-3">
                     {catsInBasket.map((cat) => (
                         <Col key={cat.id} xs={12} md={6} lg={3}>
-                            <BadgerBudsBasketCard {...cat} />
+                            <BadgerBudsBasketCard
+                                {...cat}
+                                unselect={unselectCat}
+                            />
                         </Col>
                     ))}
                 </Row>
