@@ -13,8 +13,12 @@ export default function BadgerBudsBasketCard(props) {
                 variant="top"
             />
             <Card.Footer className="d-flex gap-2">
-                <Button variant="secondary">Unselect</Button>
-                <Button>💕 Adopt</Button>
+                <Button size="sm" variant="secondary">
+                    Unselect
+                </Button>
+                <Button size="sm" variant="success">
+                    💕 Adopt
+                </Button>
             </Card.Footer>
         </Card>
     );
