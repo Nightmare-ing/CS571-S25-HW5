@@ -5,9 +5,16 @@ import BadgerBudsBasketCard from "../../BadgerBudsBasketCard";
 
 export default function BadgerBudsBasket(props) {
     const buds = useContext(BadgerBudsDataContext);
-    const catIds = JSON.parse(sessionStorage.getItem("savedCatIds"));
+
+    let catIds = JSON.parse(sessionStorage.getItem("savedCatIds"));
     const [savedCatIds, setSavedCatIds] = useState(catIds ?? []);
-    const catsInBasket = buds.filter((bud) => savedCatIds.includes(bud.id));
+    catIds = JSON.parse(sessionStorage.getItem("adoptedCatIds"));
+    const [adoptedCatIds, setAdoptedCatIds] = useState(catIds ?? []);
+
+    const catsInBasket = buds.filter(
+        (bud) =>
+            savedCatIds.includes(bud.id) && !adoptedCatIds.includes(bud.id),
+    );
 
     function unselectCat(catId) {
         const updatedSavedCatIds = savedCatIds.filter(
@@ -17,6 +24,25 @@ export default function BadgerBudsBasket(props) {
             "savedCatIds",
             JSON.stringify(updatedSavedCatIds),
         );
+        setSavedCatIds(updatedSavedCatIds);
+    }
+
+    function adoptCat(catId) {
+        const updatedAdoptedCatIds = [...adoptedCatIds, catId];
+        sessionStorage.setItem(
+            "adoptedCatIds",
+            JSON.stringify(updatedAdoptedCatIds),
+        );
+
+        const updatedSavedCatIds = savedCatIds.filter(
+            (savedCatId) => savedCatId !== catId,
+        );
+        sessionStorage.setItem(
+            "savedCatIds",
+            JSON.stringify(updatedSavedCatIds),
+        );
+
+        setAdoptedCatIds(updatedAdoptedCatIds);
         setSavedCatIds(updatedSavedCatIds);
     }
 
@@ -31,6 +57,7 @@ export default function BadgerBudsBasket(props) {
                             <BadgerBudsBasketCard
                                 {...cat}
                                 unselect={unselectCat}
+                                adopt={adoptCat}
                             />
                         </Col>
                     ))}

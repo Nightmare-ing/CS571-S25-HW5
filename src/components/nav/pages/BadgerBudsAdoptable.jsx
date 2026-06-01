@@ -5,9 +5,14 @@ import { Container, Row, Col } from "react-bootstrap";
 
 export default function BadgerBudsAdoptable(props) {
     const buds = useContext(BadgerBudsDataContext);
-    const catIds = JSON.parse(sessionStorage.getItem("savedCatIds"));
+    let catIds = JSON.parse(sessionStorage.getItem("savedCatIds"));
     const [savedCatIds, setSavedCatIds] = useState(catIds ?? []);
-    const adoptableBuds = buds.filter((bud) => !savedCatIds.includes(bud.id));
+    catIds = JSON.parse(sessionStorage.getItem("adoptedCatIds"));
+    const [adoptedCatIds, _] = useState(catIds ?? []);
+    const adoptableBuds = buds.filter(
+        (bud) =>
+            !savedCatIds.includes(bud.id) && !adoptedCatIds.includes(bud.id),
+    );
 
     function saveCat(id) {
         const updatedSavedCatIds = [...savedCatIds, id];

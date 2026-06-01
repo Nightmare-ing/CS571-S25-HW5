@@ -25,7 +25,14 @@ export default function BadgerBudsBasketCard(props) {
                 >
                     Unselect
                 </Button>
-                <Button size="sm" variant="success">
+                <Button
+                    size="sm"
+                    variant="success"
+                    onClick={() => {
+                        alert(`Thank you for adopting ${props.name}! 💕 😸`);
+                        props.adopt(props.id);
+                    }}
+                >
                     💕 Adopt
                 </Button>
             </Card.Footer>
