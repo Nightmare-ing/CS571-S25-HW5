@@ -29,15 +29,19 @@ export default function BadgerBudsAdoptable(props) {
                 The following cats are looking for a loving home! Could you
                 help?
             </p>
-            <Container fluid>
-                <Row className="gy-3">
-                    {adoptableBuds.map((bud) => (
-                        <Col xs={12} md={6} lg={3} key={bud.id}>
-                            <BadgerBudsSummary {...bud} save={saveCat} />
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
+            {adoptableBuds.length ? (
+                <Container fluid>
+                    <Row className="gy-3">
+                        {adoptableBuds.map((bud) => (
+                            <Col xs={12} md={6} lg={3} key={bud.id}>
+                                <BadgerBudsSummary {...bud} save={saveCat} />
+                            </Col>
+                        ))}
+                    </Row>
+                </Container>
+            ) : (
+                <p>No buds are available for adoption!</p>
+            )}
         </div>
     );
 }

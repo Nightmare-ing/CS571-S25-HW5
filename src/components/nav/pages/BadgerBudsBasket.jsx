@@ -50,19 +50,23 @@ export default function BadgerBudsBasket(props) {
         <div>
             <h1>Badger Buds Basket</h1>
             <p>These cute cats could be all yours!</p>
-            <Container fluid>
-                <Row className="gy-3">
-                    {catsInBasket.map((cat) => (
-                        <Col key={cat.id} xs={12} md={6} lg={3}>
-                            <BadgerBudsBasketCard
-                                {...cat}
-                                unselect={unselectCat}
-                                adopt={adoptCat}
-                            />
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
+            {catsInBasket.length ? (
+                <Container fluid>
+                    <Row className="gy-3">
+                        {catsInBasket.map((cat) => (
+                            <Col key={cat.id} xs={12} md={6} lg={3}>
+                                <BadgerBudsBasketCard
+                                    {...cat}
+                                    unselect={unselectCat}
+                                    adopt={adoptCat}
+                                />
+                            </Col>
+                        ))}
+                    </Row>
+                </Container>
+            ) : (
+                <p>You have no buds in your basket!</p>
+            )}
         </div>
     );
 }
