@@ -6,10 +6,8 @@ import BadgerBudsBasketCard from "../../BadgerBudsBasketCard";
 export default function BadgerBudsBasket(props) {
     const buds = useContext(BadgerBudsDataContext);
     const catIds = JSON.parse(sessionStorage.getItem("savedCatIds"));
-    const [savedCatIds, setSavedCatIds] = useState(catId ?? []);
-    const catsInBasket = savedCatIds.map((catIds) =>
-        buds.find((bud) => bud.id === catId),
-    );
+    const [savedCatIds, setSavedCatIds] = useState(catIds ?? []);
+    const catsInBasket = buds.filter((bud) => savedCatIds.includes(bud.id));
     return (
         <div>
             <h1>Badger Buds Basket</h1>

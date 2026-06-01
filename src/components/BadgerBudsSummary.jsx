@@ -37,9 +37,7 @@ export default function BadgerBudsSummary(props) {
                     size="sm"
                     variant="secondary"
                     onClick={() => {
-                        alert(
-                            `${props.name} with id: ${props.id} has been added to your basket!`,
-                        );
+                        alert(`${props.name} has been added to your basket!`);
                         props.save(props.id);
                     }}
                 >
